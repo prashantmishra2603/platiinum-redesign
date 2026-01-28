@@ -1,23 +1,51 @@
 import { motion } from 'framer-motion';
 import heroBike from '@/assets/hero-bike.png';
-import heroBg from '@/assets/hero-bg.jpg';
+import highwayBg from '@/assets/highway-bg.jpg';
+import movingBike from '@/assets/moving-bike.png';
+import movingTruck from '@/assets/moving-truck.png';
+import oilSplash from '@/assets/oil-splash.png';
 
-// Floating oil drops component
-const OilDrops = () => {
-  const drops = Array.from({ length: 15 }, (_, i) => ({
-    id: i,
-    left: Math.random() * 100,
-    delay: Math.random() * 5,
-    duration: 5 + Math.random() * 5,
-    size: 10 + Math.random() * 20,
-  }));
-
+// Floating oil fluid component
+const FloatingOil = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {drops.map((drop) => (
+      {/* Floating oil splash images */}
+      {[...Array(3)].map((_, i) => (
+        <motion.img
+          key={i}
+          src={oilSplash}
+          alt=""
+          className="absolute w-20 h-20 md:w-32 md:h-32 object-contain opacity-30 blur-sm"
+          style={{
+            left: `${20 + i * 30}%`,
+            top: `${15 + i * 20}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            x: [0, 15, 0],
+            rotate: [0, 10, -10, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 8 + i * 2,
+            repeat: Infinity,
+            delay: i * 2,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
+      
+      {/* Oil drops */}
+      {Array.from({ length: 12 }, (_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        delay: Math.random() * 5,
+        duration: 6 + Math.random() * 4,
+        size: 8 + Math.random() * 16,
+      })).map((drop) => (
         <motion.div
           key={drop.id}
-          className="absolute rounded-full bg-gradient-to-b from-secondary/60 to-secondary/20"
+          className="absolute rounded-full bg-gradient-to-b from-secondary/50 to-secondary/10"
           style={{
             left: `${drop.left}%`,
             width: drop.size,
@@ -26,7 +54,7 @@ const OilDrops = () => {
           initial={{ y: -100, opacity: 0 }}
           animate={{
             y: ['0vh', '110vh'],
-            opacity: [0, 1, 1, 0],
+            opacity: [0, 0.8, 0.8, 0],
           }}
           transition={{
             duration: drop.duration,
@@ -40,50 +68,75 @@ const OilDrops = () => {
   );
 };
 
+// Moving vehicles component
+const MovingVehicles = () => {
+  return (
+    <div className="absolute bottom-20 md:bottom-32 left-0 right-0 overflow-hidden pointer-events-none">
+      {/* Moving Bike - Left to Right */}
+      <motion.div
+        className="absolute bottom-0"
+        animate={{ x: ['-30vw', '130vw'] }}
+        transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+      >
+        <img
+          src={movingBike}
+          alt=""
+          className="h-16 md:h-24 lg:h-32 w-auto object-contain drop-shadow-2xl"
+          style={{ filter: 'brightness(0.9) contrast(1.1)' }}
+        />
+      </motion.div>
+
+      {/* Moving Truck - Right to Left */}
+      <motion.div
+        className="absolute bottom-4"
+        animate={{ x: ['130vw', '-40vw'] }}
+        transition={{ duration: 25, repeat: Infinity, ease: 'linear', delay: 5 }}
+      >
+        <img
+          src={movingTruck}
+          alt=""
+          className="h-20 md:h-28 lg:h-36 w-auto object-contain drop-shadow-2xl"
+          style={{ filter: 'brightness(0.85) contrast(1.1)', transform: 'scaleX(-1)' }}
+        />
+      </motion.div>
+
+      {/* Second bike with delay */}
+      <motion.div
+        className="absolute bottom-2"
+        animate={{ x: ['-20vw', '120vw'] }}
+        transition={{ duration: 14, repeat: Infinity, ease: 'linear', delay: 10 }}
+      >
+        <img
+          src={movingBike}
+          alt=""
+          className="h-12 md:h-20 lg:h-24 w-auto object-contain opacity-70 drop-shadow-xl"
+          style={{ filter: 'brightness(0.8) contrast(1.05)' }}
+        />
+      </motion.div>
+    </div>
+  );
+};
+
 export const HeroSection = () => {
   return (
     <section
       id="home"
       className="relative min-h-screen flex items-center overflow-hidden"
     >
-      {/* Background Image */}
+      {/* Background Image - Highway */}
       <div 
         className="absolute inset-0 parallax-bg"
-        style={{ backgroundImage: `url(${heroBg})` }}
+        style={{ backgroundImage: `url(${highwayBg})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/50" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
       </div>
 
-      {/* Oil Drops Animation */}
-      <OilDrops />
+      {/* Floating Oil Animation */}
+      <FloatingOil />
 
-      {/* Moving vehicles */}
-      <div className="absolute bottom-32 left-0 right-0 overflow-hidden pointer-events-none opacity-20">
-        <motion.div
-          className="absolute"
-          animate={{ x: ['-100vw', '100vw'] }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-        >
-          <svg width="120" height="60" viewBox="0 0 120 60" fill="currentColor" className="text-primary">
-            <rect x="10" y="20" width="80" height="25" rx="5" />
-            <rect x="90" y="25" width="25" height="15" rx="3" />
-            <circle cx="30" cy="50" r="10" />
-            <circle cx="80" cy="50" r="10" />
-          </svg>
-        </motion.div>
-        <motion.div
-          className="absolute"
-          animate={{ x: ['100vw', '-100vw'] }}
-          transition={{ duration: 15, repeat: Infinity, ease: 'linear', delay: 3 }}
-        >
-          <svg width="60" height="40" viewBox="0 0 60 40" fill="currentColor" className="text-secondary">
-            <ellipse cx="30" cy="20" rx="25" ry="12" />
-            <circle cx="15" cy="35" r="6" />
-            <circle cx="45" cy="35" r="6" />
-          </svg>
-        </motion.div>
-      </div>
+      {/* Moving Vehicles - Real Images */}
+      <MovingVehicles />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
