@@ -1,19 +1,22 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Products', href: '#products' },
-  { name: 'Why Us', href: '#why-us' },
-  { name: 'Testimonials', href: '#testimonials' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Products', href: '/products' },
+  { name: 'Why Us', href: '/why-us' },
+  { name: 'Testimonials', href: '/testimonials' },
+  { name: 'Blogs', href: '/blogs' },
+  { name: 'Contact', href: '/contact' },
 ];
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,7 +37,7 @@ export const Navbar = () => {
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <motion.a
-          href="#home"
+          href="/"
           className="flex items-center gap-3"
           whileHover={{ scale: 1.05 }}
         >
@@ -65,7 +68,7 @@ export const Navbar = () => {
 
         {/* CTA Button */}
         <motion.a
-          href="#contact"
+          href="/contact"
           className="hidden lg:flex btn-primary-gradient px-6 py-3 rounded-lg font-semibold text-sm tracking-wide"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -96,14 +99,16 @@ export const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              className="text-foreground font-medium py-2 border-b border-border/50"
+              className={`text-foreground font-medium py-2 border-b border-border/50 ${
+                location.pathname === link.href ? 'text-primary' : ''
+              }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {link.name}
             </a>
           ))}
           <a
-            href="#contact"
+            href="/contact"
             className="btn-primary-gradient text-center py-3 rounded-lg font-semibold mt-2"
             onClick={() => setIsMobileMenuOpen(false)}
           >

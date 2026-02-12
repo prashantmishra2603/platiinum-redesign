@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 import engineOils from '@/assets/engine-oils.png';
 import fourTOils from '@/assets/4t-oils.png';
@@ -12,36 +13,42 @@ import greases from '@/assets/greases.png';
 
 const products = [
   {
+    id: 'engine-oils',
     title: 'Heavy Duty Engine Oils',
     description: 'Advanced oils for cars, trucks, and commercial vehicles.',
     image: engineOils,
     color: 'from-primary/20 to-accent/20',
   },
   {
+    id: 'motorcycle-oils',
     title: '4T Motorcycle Engine Oils',
     description: 'Superior protection for two-wheelers and motorcycles.',
     image: fourTOils,
     color: 'from-secondary/20 to-primary/20',
   },
   {
+    id: 'three-wheeler-oils',
     title: 'Three Wheeler Oils',
     description: 'Specially formulated for auto-rickshaws and three-wheelers.',
     image: threeWheelerOils,
     color: 'from-accent/20 to-secondary/20',
   },
   {
+    id: 'gear-oils',
     title: 'Gear & Transmission Oils',
     description: 'Maximum protection for gears and transmission systems.',
     image: gearOils,
     color: 'from-primary/20 to-secondary/20',
   },
   {
+    id: 'fork-oils',
     title: 'Fork Oils',
     description: 'Premium fork oils for smooth suspension performance.',
     image: forkOils,
     color: 'from-secondary/20 to-accent/20',
   },
   {
+    id: 'greases',
     title: 'Premium Greases',
     description: 'Top quality lithium and calcium based greases.',
     image: greases,
@@ -61,41 +68,43 @@ const ProductCard = ({ product, index }: { product: typeof products[0]; index: n
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
-      <div className="relative bg-card border border-border/50 rounded-2xl overflow-hidden card-hover">
-        {/* Background gradient */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-50`} />
-        
-        {/* Image container */}
-        <div className="relative aspect-square p-6 flex items-center justify-center">
-          <motion.img
-            src={product.image}
-            alt={product.title}
-            className="max-h-48 w-auto object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500"
-          />
-        </div>
+      <Link to={`/products/${product.id}`} className="block">
+        <div className="relative bg-card border border-border/50 rounded-2xl overflow-hidden card-hover cursor-pointer">
+          {/* Background gradient */}
+          <div className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-50`} />
+          
+          {/* Image container */}
+          <div className="relative aspect-square p-6 flex items-center justify-center">
+            <motion.img
+              src={product.image}
+              alt={product.title}
+              className="max-h-48 w-auto object-contain drop-shadow-lg group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
 
-        {/* Content */}
-        <div className="relative p-6 bg-gradient-to-t from-card to-transparent">
-          <h3 className="font-display text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-            {product.title}
-          </h3>
-          <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-            {product.description}
-          </p>
-          <motion.button
-            className="inline-flex items-center gap-2 text-primary font-semibold text-sm tracking-wide group/btn"
-            whileHover={{ x: 5 }}
-          >
-            See All Products
-            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-          </motion.button>
-        </div>
+          {/* Content */}
+          <div className="relative p-6 bg-gradient-to-t from-card to-transparent">
+            <h3 className="font-display text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+              {product.title}
+            </h3>
+            <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+              {product.description}
+            </p>
+            <motion.div
+              className="inline-flex items-center gap-2 text-primary font-semibold text-sm tracking-wide group/btn"
+              whileHover={{ x: 5 }}
+            >
+              See All Products
+              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+            </motion.div>
+          </div>
 
-        {/* Hover glow effect */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5" />
+          {/* Hover glow effect */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5" />
+          </div>
         </div>
-      </div>
+      </Link>
     </motion.div>
   );
 };
@@ -131,7 +140,7 @@ export const ProductsSection = () => {
         {/* Products Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product, index) => (
-            <ProductCard key={product.title} product={product} index={index} />
+            <ProductCard key={product.id} product={product} index={index} />
           ))}
         </div>
       </div>

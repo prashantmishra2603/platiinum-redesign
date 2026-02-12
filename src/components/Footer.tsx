@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Facebook, Twitter, Instagram, Linkedin, Youtube, ArrowUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const footerLinks = {
   products: [
@@ -141,6 +142,8 @@ export const Footer = () => {
             <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
             <span>|</span>
             <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+            <span>|</span>
+            <Link to="/admin/login" className="hover:text-primary transition-colors text-xs opacity-50 hover:opacity-100">Admin</Link>
           </div>
         </div>
       </div>
