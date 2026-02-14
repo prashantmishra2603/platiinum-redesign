@@ -94,7 +94,15 @@ const BlogCard = ({ blog, index }: { blog: BlogPost; index: number }) => {
       <Link to={`/blogs/${blog.id}`} className="block group">
         <div className="bg-card border border-border/50 rounded-2xl overflow-hidden card-hover hover:border-primary/30 transition-colors">
           {/* Image */}
-          <div className={`${blog.image} h-48 w-full`} />
+          {blog.image.startsWith('data:') || blog.image.startsWith('http') ? (
+            <img 
+              src={blog.image} 
+              alt={blog.title}
+              className="h-48 w-full object-cover"
+            />
+          ) : (
+            <div className={`${blog.image} h-48 w-full`} />
+          )}
 
           {/* Content */}
           <div className="p-6">
@@ -151,7 +159,7 @@ const Blogs = () => {
         author: blog.author,
         date: blog.date,
         category: blog.category,
-        image: 'bg-gradient-to-br from-primary/20 to-accent/20',
+        image: blog.image || 'bg-gradient-to-br from-primary/20 to-accent/20',
         readTime: blog.readTime
       }));
       // Combine custom blogs with defaults (custom first)

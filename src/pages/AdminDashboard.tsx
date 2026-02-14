@@ -12,6 +12,7 @@ interface BlogPost {
   date: string;
   excerpt: string;
   readTime: string;
+  image?: string;
 }
 
 const AdminDashboard = () => {
@@ -144,6 +145,17 @@ const AdminDashboard = () => {
                 transition={{ delay: index * 0.1 }}
               >
                 <div className="flex items-start justify-between gap-4">
+                  {/* Thumbnail */}
+                  {blog.image && (
+                    <div className="w-32 h-24 flex-shrink-0">
+                      <img 
+                        src={blog.image} 
+                        alt={blog.title}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    </div>
+                  )}
+                  
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-3">
                       <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold">

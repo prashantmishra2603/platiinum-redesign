@@ -327,7 +327,15 @@ const BlogDetail = () => {
               <h1 className="font-display text-5xl md:text-6xl font-bold text-foreground mb-6">
                 {blog.title}
               </h1>
-              <div className={`${blog.image} h-96 rounded-2xl mb-8`} />
+              {blog.image.startsWith('data:') || blog.image.startsWith('http') ? (
+                <img 
+                  src={blog.image} 
+                  alt={blog.title}
+                  className="w-full h-96 object-cover rounded-2xl mb-8"
+                />
+              ) : (
+                <div className={`${blog.image} h-96 rounded-2xl mb-8`} />
+              )}
               <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-border/30">
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-4 text-muted-foreground">

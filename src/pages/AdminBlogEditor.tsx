@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Save } from 'lucide-react';
+import { ArrowLeft, Save, Upload, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface BlogPost {
@@ -12,6 +12,7 @@ interface BlogPost {
   category: string;
   excerpt: string;
   readTime: string;
+  image?: string; // Base64 encoded image or URL
   content: string[];
   sections: Array<{
     heading: string;
@@ -46,9 +47,12 @@ const AdminBlogEditor = () => {
     category: '',
     excerpt: '',
     readTime: '',
+    image: '',
     content: [''],
     sections: [{ heading: '', content: [''] }]
   });
+
+  const [imagePreview, setImagePreview] = useState<string>('');
 
   useEffect(() => {
     if (!localStorage.getItem('adminAuthenticated')) {
@@ -64,6 +68,9 @@ const AdminBlogEditor = () => {
         const blog = blogs.find((b: BlogPost) => b.id === blogId);
         if (blog) {
           setFormData(blog);
+          if (blog.image) {
+            setImagePreview(blog.image);
+          }
         }
       }
     }
@@ -150,6 +157,38 @@ const AdminBlogEditor = () => {
       newSections[sectionIndex].content.push('');
       return { ...prev, sections: newSections };
     });
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        setError('Please upload a valid image file');
+        return;
+      }
+
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setError('Image size should be less than 5MB');
+        return;
+      }
+
+      // Convert to base64
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setImagePreview(base64String);
+        setFormData(prev => ({ ...prev, image: base64String }));
+        setError('');
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeImage = () => {
+    setImagePreview('');
+    setFormData(prev => ({ ...prev, image: '' }));
   };
 
   if (loading) {
@@ -279,6 +318,44 @@ const AdminBlogEditor = () => {
                 rows={3}
                 className="w-full px-4 py-3 bg-background border border-border/50 rounded-lg text-foreground placeholder-muted-foreground focus:outline-none focus:border-primary/30 focus:ring-2 focus:ring-primary/10 transition-all resize-none"
               />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-2">Featured Image</label>
+              <div className="space-y-4">
+                {imagePreview ? (
+                  <div className="relative">
+                    <img
+                      src={imagePreview}
+                      alt="Preview"
+                      className="w-full h-64 object-cover rounded-lg border border-border/50"
+                    />
+                    <button
+                      onClick={removeImage}
+                      className="absolute top-2 right-2 p-2 bg-destructive/90 hover:bg-destructive text-destructive-foreground rounded-lg transition-colors"
+                      type="button"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-border/50 rounded-lg cursor-pointer bg-background hover:bg-accent/5 transition-colors">
+                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                      <Upload className="w-10 h-10 mb-3 text-muted-foreground" />
+                      <p className="mb-2 text-sm text-muted-foreground">
+                        <span className="font-semibold">Click to upload</span> or drag and drop
+                      </p>
+                      <p className="text-xs text-muted-foreground">PNG, JPG, GIF up to 5MB</p>
+                    </div>
+                    <input
+                      type="file"
+                      className="hidden"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                    />
+                  </label>
+                )}
+              </div>
             </div>
           </div>
         </motion.div>
