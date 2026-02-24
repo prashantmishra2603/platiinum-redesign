@@ -1,32 +1,44 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Cpu, TrendingUp, ShieldCheck, Gauge } from 'lucide-react';
+import { Clock, MapPin, DollarSign, Users, Truck, Handshake } from 'lucide-react';
 
 const features = [
   {
-    icon: Cpu,
-    title: 'Advanced Technology',
-    description: 'Formulated with cutting-edge additives for optimal engine health.',
+    icon: Clock,
+    title: '50+ Years of Industry Expertise',
+    description: 'Deep-rooted experience in lubricant formulation and manufacturing for Indian conditions.',
     color: 'from-primary to-accent',
   },
   {
-    icon: TrendingUp,
-    title: 'Proven Performance',
-    description: 'Tested to perform in Indian roads & climatic conditions.',
+    icon: MapPin,
+    title: 'Indian-Condition Optimized',
+    description: 'Formulations specifically designed for extreme heat, heavy loads, and demanding terrains.',
     color: 'from-secondary to-primary',
   },
   {
-    icon: ShieldCheck,
-    title: 'Trusted Protection',
-    description: 'Extends engine life and reduces wear & tear.',
+    icon: DollarSign,
+    title: 'Competitive Pricing',
+    description: 'Premium quality at prices that deliver real value without compromise.',
     color: 'from-accent to-secondary',
   },
   {
-    icon: Gauge,
-    title: 'Unmatched Efficiency',
-    description: 'Enhances mileage with smoother engine performance.',
+    icon: Users,
+    title: 'Strong Dealer & Mechanic Support',
+    description: 'Dedicated partnership programs and technical assistance for our network.',
     color: 'from-primary to-secondary',
+  },
+  {
+    icon: Truck,
+    title: 'Reliable Supply Chain',
+    description: 'Nationwide distribution network ensuring consistent product availability.',
+    color: 'from-secondary to-accent',
+  },
+  {
+    icon: Handshake,
+    title: 'Long-Term Business Association',
+    description: 'We do not just supply lubricants. We build dependable partnerships.',
+    color: 'from-accent to-primary',
   },
 ];
 
@@ -56,7 +68,7 @@ export const WhyChooseSection = () => {
             WHY CHOOSE US
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
-            Why Choose <span className="text-secondary">Platiinum</span>?
+            Why Choose <span className="text-secondary">Platinum Lubricants</span>?
           </h2>
         </motion.div>
 

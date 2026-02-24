@@ -4,25 +4,25 @@ import { Link } from 'react-router-dom';
 
 const footerLinks = {
   products: [
-    { name: 'Heavy Duty Engine Oils', href: '#products' },
-    { name: '4T Motorcycle Oils', href: '#products' },
-    { name: 'Three Wheeler Oils', href: '#products' },
-    { name: 'Gear & Transmission Oils', href: '#products' },
-    { name: 'Premium Greases', href: '#products' },
+    { name: 'Heavy Duty Engine Oils', href: '/products' },
+    { name: '4T Motorcycle Oils', href: '/products' },
+    { name: 'Three Wheeler Oils', href: '/products' },
+    { name: 'Gear & Transmission Oils', href: '/products' },
+    { name: 'Premium Greases', href: '/products' },
   ],
   company: [
-    { name: 'About Us', href: '#about' },
-    { name: 'Why Choose Us', href: '#why-us' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'Contact', href: '#contact' },
-    { name: 'Careers', href: '#' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Manufacturing', href: '/manufacturing' },
+    { name: 'Quality Assurance', href: '/quality' },
+    { name: 'Why Choose Us', href: '/why-us' },
+    { name: 'Become a Dealer', href: '/become-dealer' },
   ],
   support: [
+    { name: 'Contact Us', href: '/contact' },
     { name: 'Product Catalog', href: '#' },
     { name: 'Technical Data', href: '#' },
-    { name: 'Distributor Portal', href: '#' },
     { name: 'FAQs', href: '#' },
-    { name: 'Blog', href: '#' },
+    { name: 'Blog', href: '/blogs' },
   ],
 };
 
@@ -58,8 +58,7 @@ export const Footer = () => {
               </div>
             </div>
             <p className="text-muted-foreground mb-6 max-w-sm">
-              With 50 years of expertise, we engineer trust through premium lubricants 
-              that deliver unmatched protection and superior performance.
+              Platinum Lubricants is an Indian lubricant manufacturing company with over 50 years of experience. We deliver high-performance lubricants engineered specifically for Indian engines and operating conditions.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => (

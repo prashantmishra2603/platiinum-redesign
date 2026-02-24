@@ -153,7 +153,7 @@ export const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              NEELAM CHEMICALS PRESENTS
+              PLATINUM LUBRICANTS
             </motion.p>
             
             <motion.h1
@@ -162,28 +162,39 @@ export const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <span className="text-glow">'PLATIINUM</span>
+              <span className="text-glow">Engineered for Indian Roads.</span>
               <br />
-              <span className="text-glow">LUBRICANTS'</span>
+              <span className="text-glow-gold">Built for Long-Lasting Performance.</span>
             </motion.h1>
 
-            <motion.h2
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-secondary mb-6"
+            <motion.p
+              className="text-lg text-muted-foreground mb-4 max-w-xl mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              <span className="text-glow-gold">Power That Lasts..</span>
-            </motion.h2>
+              For over five decades, we have powered engines across India with high-performance lubricants designed specifically for Indian driving conditions, heavy loads, extreme temperatures, and demanding terrains.
+            </motion.p>
 
-            <motion.p
-              className="text-xl text-muted-foreground mb-8 max-w-lg mx-auto lg:mx-0"
+            <motion.div
+              className="flex flex-wrap gap-3 justify-center lg:justify-start mb-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.45 }}
             >
-              We don't just make lubricants — we engineer trust
-            </motion.p>
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
+                <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
+                Advanced additive technology
+              </span>
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary/10 text-secondary text-sm font-medium rounded-full">
+                <span className="w-1.5 h-1.5 bg-secondary rounded-full animate-pulse" />
+                Precision blending
+              </span>
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-accent/10 text-accent text-sm font-medium rounded-full">
+                <span className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse" />
+                Performance you can rely on
+              </span>
+            </motion.div>
 
             <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
@@ -192,20 +203,20 @@ export const HeroSection = () => {
               transition={{ delay: 0.6 }}
             >
               <motion.a
-                href="#products"
+                href="/products"
                 className="btn-primary-gradient px-8 py-4 rounded-lg font-bold text-lg tracking-wide animate-pulse-glow"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <span className="text-primary-foreground">Our Products</span>
+                <span className="text-primary-foreground">Explore Products</span>
               </motion.a>
               <motion.a
-                href="#about"
-                className="px-8 py-4 rounded-lg font-bold text-lg border-2 border-primary/50 text-primary hover:bg-primary/10 transition-colors"
+                href="/become-dealer"
+                className="px-8 py-4 rounded-lg font-bold text-lg border-2 border-secondary/50 text-secondary hover:bg-secondary/10 transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Learn More
+                Become a Dealer
               </motion.a>
             </motion.div>
           </motion.div>

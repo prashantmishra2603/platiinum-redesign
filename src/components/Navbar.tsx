@@ -7,9 +7,9 @@ const navLinks = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Products', href: '/products' },
+  { name: 'Manufacturing', href: '/manufacturing' },
+  { name: 'Quality', href: '/quality' },
   { name: 'Why Us', href: '/why-us' },
-  { name: 'Testimonials', href: '/testimonials' },
-  { name: 'Blogs', href: '/blogs' },
   { name: 'Contact', href: '/contact' },
 ];
 
@@ -68,12 +68,12 @@ export const Navbar = () => {
 
         {/* CTA Button */}
         <motion.a
-          href="/contact"
+          href="/become-dealer"
           className="hidden lg:flex btn-primary-gradient px-6 py-3 rounded-lg font-semibold text-sm tracking-wide"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <span className="text-primary-foreground">Be a Distributor</span>
+          <span className="text-primary-foreground">Become a Dealer</span>
         </motion.a>
 
         {/* Mobile Menu Button */}
@@ -108,11 +108,11 @@ export const Navbar = () => {
             </a>
           ))}
           <a
-            href="/contact"
+            href="/become-dealer"
             className="btn-primary-gradient text-center py-3 rounded-lg font-semibold mt-2"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            <span className="text-primary-foreground">Be a Distributor</span>
+            <span className="text-primary-foreground">Become a Dealer</span>
           </a>
         </div>
       </motion.div>

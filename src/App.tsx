@@ -17,6 +17,9 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminBlogEditor from "./pages/AdminBlogEditor";
 import NotFound from "./pages/NotFound";
+import Manufacturing from "./pages/Manufacturing";
+import Quality from "./pages/Quality";
+import BecomeDealer from "./pages/BecomeDealer";
 
 const queryClient = new QueryClient();
 
@@ -31,7 +34,10 @@ const App = () => (
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:productId" element={<ProductDetail />} />
+          <Route path="/manufacturing" element={<Manufacturing />} />
+          <Route path="/quality" element={<Quality />} />
           <Route path="/why-us" element={<WhyUs />} />
+          <Route path="/become-dealer" element={<BecomeDealer />} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:blogId" element={<BlogDetail />} />
